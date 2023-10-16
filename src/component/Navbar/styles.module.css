@@ -1,0 +1,21 @@
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.search_bar{
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 12px;
+  width: 50%;
+}
+
+.input{
+  width: 85%;
+  border:none;
+}
+.input:focus-visible {
+  outline: none;
+}

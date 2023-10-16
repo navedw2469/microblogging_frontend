@@ -7,8 +7,9 @@ import { useState } from 'react'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const [x, setx] = useState(1);
   return (
-      <>{x}</>
+      <div className='text-black flex-col'>
+        Home
+      </div>
   )
 }

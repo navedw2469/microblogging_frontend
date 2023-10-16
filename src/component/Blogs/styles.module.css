@@ -1,0 +1,25 @@
+.cards{
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+.card{
+  padding: 10px;
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.profile{
+  width: 52px;
+  padding-right: 12px;
+}
+
+.blog{
+
+}
+
+.profile_photo{
+  width: 40px;
+  height: 40px; 
+  border-radius: 50%;
+}
