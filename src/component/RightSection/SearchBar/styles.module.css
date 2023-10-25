@@ -1,0 +1,9 @@
+.input{
+  width: 85%;
+  border:none;
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+}
+.input:focus-visible {
+  outline: none;
+}
