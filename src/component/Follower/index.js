@@ -9,6 +9,7 @@ import axios from 'axios';
 
 const Follower = () => {
   const router = useRouter();
+  const userName = router.query.user_name;
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -59,7 +60,7 @@ const Follower = () => {
               <div className='h-[5px] bg-blue-400 rounded-md ml-28 mr-28'></div> 
             </div>
             
-            <div className='flex-1 hover:bg-slate-200 cursor-pointer' onClick={()=>router.push('./following')}>
+            <div className='flex-1 hover:bg-slate-200 cursor-pointer' onClick={()=>router.push(`/${userName}/following`)}>
               <div className='text-center p-2 font-bold'>Following</div>
             </div>
           </div>

@@ -5,7 +5,7 @@ import RightSection from '../RightSection';
 
 const Posts = () => {
   return(
-    <div className='flex justify-center'>
+    <div className='flex justify-center dark:bg-slate-950'>
       <Navigation />
       <Middle />
       <RightSection />

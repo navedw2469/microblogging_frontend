@@ -37,7 +37,7 @@ const Middle = () => {
   }, []);
 
   return(
-    <div className="w-[625px] h-[100vh] overflow-y-scroll" onScroll={handleScroll}>
+    <div className="w-[625px] h-[100vh] overflow-y-scroll no-scrollbar" onScroll={handleScroll}>
       <Navbar />
       {data?.list?.map((obj)=>{
         return(

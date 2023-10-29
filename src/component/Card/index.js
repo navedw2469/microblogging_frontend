@@ -3,7 +3,7 @@ import React from 'react';
 const Card = ({data={}}) =>{
 
   return (
-    <div className="border-b p-3 flex gap-4 hover:bg-gray-100 cursor-pointer border-l border-r" >
+    <div className="border-b p-3 flex gap-4 hover:bg-gray-100 cursor-pointer border-l border-r dark:text-white dark:hover:bg-neutral-900">
 
       <div>
         <img src={data?.user?.profile_image_url} alt='profile image' width="40" height="40" className='rounded-full'/>

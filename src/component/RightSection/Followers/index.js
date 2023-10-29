@@ -17,14 +17,14 @@ const Followers = () => {
   }, []);
 
   return (
-    <div className="bg-slate-100 rounded-2xl border m-3">
-      <div className='p-3 border-b font-bold'>
+    <div className="bg-slate-100 rounded-2xl m-3 dark:bg-neutral-800 dark:text-white">
+      <div className='p-3  font-extrabold text-lg'>
         FOLLOWERS
       </div>
       {
         data?.list?.map((user)=>{
           return(
-            <div className='flex gap-3 p-3 items-center hover:bg-slate-200 cursor-pointer' key={user?.id} onClick={()=>router.push('/user')}>
+            <div className='flex gap-3 p-3 items-center hover:bg-slate-200 cursor-pointer dark:hover:bg-neutral-700' key={user?.id} onClick={()=>router.push('/' + user?.user_name)}>
               <img src={user?.profile_image_url} alt="photo" className='w-[40px] h-[40px] rounded-full'/>
               <div>
                 <p className='font-bold text-[15px]'>{user?.full_name}</p>
@@ -34,7 +34,7 @@ const Followers = () => {
           );
         })
       }
-      {data?.total > 1 && <div className='p-3 border-t text-[15px] cursor-pointer text-blue-500 rounded-b-2xl hover:bg-slate-200'>
+      {data?.total > 1 && <div className='p-3 text-[15px] cursor-pointer text-sky-500 rounded-b-2xl hover:bg-slate-200 dark:hover:bg-neutral-700'>
         Show More
       </div>}
     </div>

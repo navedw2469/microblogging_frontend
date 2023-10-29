@@ -5,7 +5,7 @@ import Followings from './Followings';
 
 const RightSection = ({searchBar = true}) =>{
   return (
-  <div className='pl-5 xl:w-[390px] lg:w-[320px] max-lg:hidden h-[100vh] overflow-y-auto'>
+  <div className='pl-5 xl:w-[390px] lg:w-[320px] max-lg:hidden h-[100vh] overflow-y-auto no-scrollbar'>
     {searchBar && <SearchBar />}
     <Followers />
     <Followings />

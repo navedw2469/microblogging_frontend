@@ -68,7 +68,7 @@ const User = () => {
       }).catch(function (error) {
         console.log(error);
         setLoading(false);
-      });;
+      });
     }
   }
 
@@ -99,11 +99,11 @@ const User = () => {
               {followed && <div className='px-4 py-2 border-2 rounded-full font-bold cursor-pointer hover:bg-slate-100' onClick={()=>setFollowed(false)}> Unfollow </div>}
             </div>
             <div className='flex gap-5 mb-1'>
-              <div className='flex hover:underline cursor-pointer'>
+              <div className='flex hover:underline cursor-pointer' onClick={()=>router.push(`/${userName}/followers`)}>
                 <div className='text-[14px] font-bold'>{234}</div>
                 <div className='text-[14px]'>&nbsp;{"Followers"}</div>
               </div>
-              <div className='flex gap-1 hover:underline cursor-pointer'>
+              <div className='flex gap-1 hover:underline cursor-pointer' onClick={()=>router.push(`/${userName}/following`)}>
                 <div className='text-[14px] font-bold'>{234}</div>
                 <div className='text-[14px]'>&nbsp;{"Followings"}</div>
               </div>
