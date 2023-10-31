@@ -6,7 +6,7 @@ import linkIcon from './link_icon.png'
 import back from './back.png'
 import Image from 'next/image'
 import { useRouter } from 'next/router';
-import axios from 'axios';
+import secureAPI from '@/api/axios';
 
 const isEmpty = (obj) => {
   for (const prop in obj) {
@@ -29,7 +29,7 @@ const User = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:3000/get_user", {
+    secureAPI.get("get_user", {
       params: { user_name: userName },
     }).then(function (response) {
       setData(response.data?.data);
@@ -41,7 +41,7 @@ const User = () => {
   useEffect(()=>{
     if(!isEmpty(data)){
       setLoading(true);
-      axios.get("http://127.0.0.1:3000/list_posts", {
+      secureAPI.get("list_posts", {
         params: { is_user_data_required: true },
       }).then(function (response) {
         setPosts(response.data);
@@ -58,7 +58,7 @@ const User = () => {
 
     if (bottom && !loading && posts?.page !== posts?.total) {
       setLoading(true);
-      axios.get("http://127.0.0.1:3000/list_posts", {
+      secureAPI.get("list_posts", {
         params: { is_user_data_required: true, page: posts.page + 1 },
       }).then(function (response) {
         setPosts((oldData)=>{

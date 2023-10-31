@@ -5,7 +5,7 @@ import Image from 'next/image';
 import back from './back.png';
 import { useRouter } from 'next/router';
 import Card from '../Card';
-import axios from 'axios';
+import secureAPI from '@/api/axios';
 
 const Bookmarks = () => {
   const router = useRouter();
@@ -17,7 +17,7 @@ const Bookmarks = () => {
 
     if (bottom && !loading && data?.page !== data?.total) {
       setLoading(true);
-      axios.get("http://127.0.0.1:3000/list_posts", {
+      secureAPI.get("list_posts", {
         params: { is_user_data_required: true, page: data.page + 1 },
       }).then(function (response) {
         setData((oldData)=>{
@@ -32,7 +32,7 @@ const Bookmarks = () => {
   }
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:3000/list_posts", {
+    secureAPI.get("list_posts", {
       params: { is_user_data_required: true },
     }).then(function (response) {
       setData(response.data);

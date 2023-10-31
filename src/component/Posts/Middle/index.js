@@ -1,9 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Navbar from '../Top';
 import Card from '@/component/Card';
-import axios from 'axios';
+import secureAPI from '@/api/axios';
+import UserContext from '@/context/UserContext';
 
 const Middle = () => {
+  const {user} = useContext(UserContext);
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -12,7 +14,7 @@ const Middle = () => {
 
     if (bottom && !loading && data?.page !== data?.total) {
       setLoading(true);
-      axios.get("http://127.0.0.1:3000/list_posts", {
+      secureAPI.get("list_posts", {
         params: { is_user_data_required: true, page: data.page + 1 },
       }).then(function (response) {
         setData((oldData)=>{
@@ -22,12 +24,12 @@ const Middle = () => {
       }).catch(function (error) {
         console.log(error);
         setLoading(false);
-      });;
+      });
     }
   }
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:3000/list_posts", {
+    secureAPI.get("list_posts", {
       params: { is_user_data_required: true },
     }).then(function (response) {
       setData(response.data);

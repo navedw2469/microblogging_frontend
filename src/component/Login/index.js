@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Image from 'next/image';
 import logo from './logo-no-background.png'
 import { useRouter } from 'next/router';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
+import UserContext from '@/context/UserContext';
 import Cookies from 'js-cookie';
+import secureAPI from '@/api/axios';
+
 
 const Login = () => {
   const router = useRouter();
-  console.log(Cookies.get('name'));
+  const {setUser} = useContext(UserContext);
 
   const {
     register,
@@ -17,15 +20,17 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    axios.post("http://127.0.0.1:3000/login_user", 
+    secureAPI.post("login_user", 
       { user_name: data?.username, password: data?.password },
     ).then(function (response) {
       Cookies.set('session_token', response?.data?.session_token);
-      console.log(Cookies.get('session_token'));
+      setUser(response?.data?.user);
+      router.push('/posts');
     }).catch(function (error) {
       console.log(error);
     });
   };
+  
   return(
     <div className="flex flex-col items-center h-[625px] gap-3 p-5 pt-20">
       <div className="md:border w-[350px] rounded-lg">

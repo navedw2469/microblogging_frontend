@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import Card from '@/component/Card';
 import SearchBar from '../SearchBar';
-import axios from 'axios';
 import ProfileCard from '@/component/ProfileCard';
+import secureAPI from '@/api/axios';
 
 const Middle = () => {
   const [posts, setPosts] = useState({});
@@ -20,7 +20,7 @@ const Middle = () => {
 
     if (bottom && !loading && posts?.page !== posts?.total) {
       setLoading(true);
-      axios.get("http://127.0.0.1:3000/list_posts", {
+      secureAPI.get("list_posts", {
         params: { is_user_data_required: true, page: posts.page + 1 },
       }).then(function (response) {
         setPosts((oldData)=>{
@@ -39,7 +39,7 @@ const Middle = () => {
 
     if (bottom && !loading && users?.page !== users?.total) {
       setLoading(true);
-      axios.get("http://127.0.0.1:3000/list_users", {
+      secureAPI.get("list_users", {
         params: { page:  (users.page ? users.page + 1 : 1) }
       }).then(function (response) {
         setUsers((oldData)=>{
@@ -55,7 +55,7 @@ const Middle = () => {
 
   useEffect(() => {
     if(tab === 'posts' && !posts?.page){
-      axios.get("http://127.0.0.1:3000/list_posts", {
+      secureAPI.get("list_posts", {
         params: { is_user_data_required: true },
       }).then(function (response) {
         setPosts(response.data);
@@ -65,7 +65,7 @@ const Middle = () => {
     }
 
     if(tab === 'users' && !users?.page){
-      axios.get("http://127.0.0.1:3000/list_users", {
+      secureAPI.get("list_users", {
         params: { page: 1 },
       }).then(function (response) {
         setUsers(response.data);

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import back from './back.png';
 import { useRouter } from 'next/router';
 import ProfileCard from '../ProfileCard';
-import axios from 'axios';
+import secureAPI from '@/api/axios';
 
 const Following = () => {
   const router = useRouter();
@@ -18,7 +18,7 @@ const Following = () => {
 
     if (bottom && !loading && data?.page !== data?.total) {
       setLoading(true);
-      axios.get("http://127.0.0.1:3000/list_users", {
+      secureAPI.get("list_users", {
         params: { page: data.page + 1 },
       }).then(function (response) {
         setData((oldData)=>{
@@ -33,7 +33,7 @@ const Following = () => {
   }
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:3000/list_users", {
+    secureAPI.get("list_users", {
       params: { is_user_data_required: true },
     }).then(function (response) {
       setData(response.data);

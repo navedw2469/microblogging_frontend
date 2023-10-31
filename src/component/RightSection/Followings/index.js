@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/navigation'
-import axios from 'axios';
+import secureAPI from '@/api/axios';
+import UserContext from '@/context/UserContext';
 
 const Followings = () => {
   const router = useRouter();
   const [data, setData] = useState({});
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:3000/list_users", {
+    secureAPI.get("list_users", {
       params: { is_user_data_required: true, page_limit: 3, sort_type: 'asc', sort_by: 'id' },
     }).then(function (response) {
       setData(response.data);
@@ -34,7 +36,7 @@ const Followings = () => {
           );
         })
       }
-      {data?.total > 1 && <div className='p-3 text-[15px] cursor-pointer text-sky-500 rounded-b-2xl hover:bg-slate-200 dark:hover:bg-neutral-700'>
+      {data?.total > 1 && <div className='p-3 text-[15px] cursor-pointer text-sky-500 rounded-b-2xl hover:bg-slate-200 dark:hover:bg-neutral-700' onClick={()=>router.push(`/${user?.user_name}/following`)}>
         Show More
       </div>}
     </div>
