@@ -2,19 +2,23 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/navigation'
 import secureAPI from '@/api/axios';
 import UserContext from '@/context/UserContext';
+import {FollowerSkelton} from '@/component/common/Skelton';
 
 const Followers = () => {
   const router = useRouter();
   const [data, setData] = useState({});
   const { user } = useContext(UserContext)
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     secureAPI.get("list_users", {
       params: { is_user_data_required: true, page_limit: 3 },
     }).then(function (response) {
       setData(response.data);
+      setLoading(false);
     }).catch(function (error) {
       console.log(error);
+      setLoading(false);
     });
   }, []);
 
@@ -23,7 +27,8 @@ const Followers = () => {
       <div className='p-3  font-extrabold text-lg'>
         FOLLOWERS
       </div>
-      {
+      
+      {  
         data?.list?.map((user)=>{
           return(
             <div className='flex gap-3 p-3 items-center hover:bg-slate-200 cursor-pointer dark:hover:bg-neutral-700' key={user?.id} onClick={()=>router.push('/' + user?.user_name)}>
@@ -35,10 +40,15 @@ const Followers = () => {
             </div>
           );
         })
+        
       }
-      {data?.total > 1 && <div className='p-3 text-[15px] cursor-pointer text-sky-500 rounded-b-2xl hover:bg-slate-200 dark:hover:bg-neutral-700' onClick={()=>router.push(`/${user?.user_name}/followers`)}>
+      {loading && <FollowerSkelton/>}
+      {data?.total > 1 && <div className='p-3 text-[15px] cursor-pointer text-sky-500 rounded-b-2xl hover:bg-slate-200 dark:hover:bg-neutral-700'>
         Show More
       </div>}
+      {
+        data?.total === 0 && <div className='text-center'>No Follower</div>
+      }
     </div>
   )
 }
