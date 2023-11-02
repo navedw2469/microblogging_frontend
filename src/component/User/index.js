@@ -7,6 +7,7 @@ import back from './back.png'
 import Image from 'next/image'
 import { useRouter } from 'next/router';
 import secureAPI from '@/api/axios';
+import {ProfileSkelton } from '@/component/common/Skelton';
 
 const isEmpty = (obj) => {
   for (const prop in obj) {
@@ -136,6 +137,7 @@ const User = () => {
             { tab === 'likes' && <div className='h-[5px] bg-blue-400 rounded-md ml-12 mr-12'></div>}
           </div>
         </div>
+        <ProfileSkelton/>
         {
         posts?.list?.map((obj)=>{
           return(
