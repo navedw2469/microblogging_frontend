@@ -3,12 +3,14 @@ import Card from '@/component/Card';
 import SearchBar from '../SearchBar';
 import ProfileCard from '@/component/ProfileCard';
 import secureAPI from '@/api/axios';
+import {PostSkelton, UserSkelton} from '@/component/common/Skelton';
 
 const Middle = () => {
   const [posts, setPosts] = useState({});
   const [users, setUsers] = useState({});
   const [loading, setLoading] = useState(false);
   const [tab, setTab] = useState('posts');
+  
 
   const handleScroll = (e) => {
     if(tab === 'posts') return handleScrollPosts(e);
@@ -92,17 +94,23 @@ const Middle = () => {
         </div>
       </div>
       {tab === 'posts' && posts?.list?.map((obj)=>{
+        
         return(
           <Card key={obj?.id} data={obj}/>
           );
+          
         })
       }
+      
+      {tab === 'posts' && <PostSkelton />}
+      
       {tab === 'users' && users?.list?.map((obj)=>{
         return(
           <ProfileCard key={obj?.id} data={obj}/>
           );
         })
       }
+      {tab === 'users' && <UserSkelton />}
       {loading && <div>Loading ...</div>}
     </div>
   );
