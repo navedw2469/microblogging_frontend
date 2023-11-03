@@ -35,8 +35,8 @@ const Login = () => {
     <div className="flex flex-col items-center h-[625px] gap-3 p-5 pt-20">
       <div className="md:border w-[350px] rounded-lg">
         <Image src={logo} alt="logo" className="w-[175px] m-auto my-10"/>
-        <input type="text" id="username" name="username" placeholder="username" {...register("username")} className="border w-[270px] h-[36px] m-auto block p-2 mb-2 rounded-lg bg-slate-100"></input>
-        <input type="password" id="password" name="password" placeholder="password" {...register("password")} className="border w-[270px] h-[36px] m-auto block p-2 mb-2 rounded-lg bg-slate-100"></input>
+        <input type="text" id="username" name="username" placeholder="username" {...register("username", { required: "Username is required" })} className="border w-[270px] h-[36px] m-auto block p-2 mb-2 rounded-lg bg-slate-100"></input>
+        <input type="password" id="password" name="password" placeholder="password" {...register("password", { required: "Password is required" })} className="border w-[270px] h-[36px] m-auto block p-2 mb-2 rounded-lg bg-slate-100"></input>
         <button type="button" className="w-[270px] h-[36px] m-auto block my-3 rounded-lg bg-blue-400 hover:bg-blue-500" onClick={handleSubmit(onSubmit)}>Login</button>
         <hr className="w-[270px] m-auto my-2"/>
         <div className="text-center text-[14px] mt-2 mb-10 text-blue-800 cursor-pointer">Forgotten your password?</div>

@@ -60,12 +60,12 @@ const Middle = () => {
       
       {((data || {}).list || [])?.map((obj)=>{
         return(
-          <Card key={obj?.id} data={obj}/>
+          <Card key={obj?.id} data={obj} setData={setData}/>
           );
         })
       }
       {
-      loading && <PostSkelton/>
+      loading && [1,2,3,4].map((e)=><PostSkelton key={e}/>)
       }
     </div>
   );

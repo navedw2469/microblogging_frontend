@@ -2,12 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
 import UserContext from "@/context/UserContext";
 import IconMapping from "./IconMapping";
+import Cookies from 'js-cookie';
+import secureAPI from "@/api/axios";
 
 const Navigation = () => {
   const router = useRouter();
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [theme, setTheme] = useState();
-  console.log(user, "user");
 
   useEffect(() => {
     if (
@@ -26,6 +27,21 @@ const Navigation = () => {
       : document.documentElement.classList.remove("dark");
     setTheme(toTheme);
   };
+
+  const handleLogOut = () =>{
+    secureAPI.post("logout_user", 
+      { session_token: Cookies.get('session_token') },
+    ).then(function (response) {
+      Cookies.remove('session_token');
+      setUser({});
+      router.push('/login');
+    }).catch(function (error) {
+      console.log(error);
+      Cookies.remove('session_token');
+      setUser({});
+      router.push('/login');
+    });
+  }
 
   return (
     <div className="xl:w-[250px] lg:x-[85px] lg:h-screen ml-3 mr-3 flex flex-col max-md:hidden overflow-y-scroll no-scrollbar dark:bg-slate-950">
@@ -89,7 +105,7 @@ const Navigation = () => {
               <p className="font-light text-[12px]">@{user?.user_name}</p>
             </div>
           </div>
-          <div className="font-bold text-red-400 cursor-pointer hover:text-red-500">
+          <div className="font-bold text-red-400 cursor-pointer hover:text-red-500" onClick={handleLogOut}>
             Log Out
           </div>
         </div>
